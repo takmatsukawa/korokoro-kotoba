@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ころころ ことば</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="stage"></div>
+
+  <!-- プレイ中の HUD -->
+  <div id="hud" hidden>
+    <header class="top">
+      <button class="icon" id="btn-menu" title="ステージ選択 (Esc)">☰</button>
+      <div class="title">
+        <div class="stage-no" id="stage-no">ステージ 1</div>
+        <div class="word" id="word"></div>
+      </div>
+      <div class="moves">
+        <div class="label">のこり</div>
+        <div><span id="moves">0</span><small> 手</small></div>
+        <div class="par">最短 <span id="par">0</span> 手で解く</div>
+      </div>
+    </header>
+
+    <aside class="gojuon" id="gojuon"></aside>
+
+    <div class="toast" id="toast"></div>
+
+    <footer class="bottom">
+      <button id="btn-undo" title="一手もどす (Z)">↶ もどす</button>
+      <button id="btn-retry" title="やりなおし (R)">↺ さいしょから</button>
+      <button id="btn-hint" title="ヒント (H)">💡 ヒント</button>
+      <button class="icon" id="btn-sound" title="音 (M)">🔊</button>
+    </footer>
+
+    <div class="dpad" id="dpad">
+      <button data-d="3">▲</button>
+      <button data-d="2">◀</button>
+      <button data-d="0">▶</button>
+      <button data-d="1">▼</button>
+    </div>
+  </div>
+
+  <!-- タイトル -->
+  <section class="screen" id="title-screen">
+    <div class="card title-card">
+      <div class="logo"><span>こ</span><span>ろ</span><span>こ</span><span>ろ</span><br><span>こ</span><span>と</span><span>ば</span></div>
+      <p class="lead">50音表の上を転がる、ひらがなサイコロのパズル。<br>サイコロを転がして、お題のことばをスタンプしよう！</p>
+      <ul class="rules">
+        <li><b>→ ←</b> で転がすと「あ→か→さ…」と<b>行</b>が変わる</li>
+        <li><b>↓ ↑</b> で転がすと「あ→い→う…」と<b>段</b>が変わる</li>
+        <li>番号つきのマスに<b>同じ文字</b>を上にして止まるとスタンプ！</li>
+        <li>押したマスは<b>印のブロック</b>になって通れなくなる</li>
+        <li>手数は<b>最短手数ぴったり</b>。ムダな一手は許されない</li>
+      </ul>
+      <button class="primary" id="btn-start">あそぶ</button>
+    </div>
+  </section>
+
+  <!-- ステージ選択 -->
+  <section class="screen" id="select-screen" hidden>
+    <div class="card">
+      <h2>ステージをえらぶ</h2>
+      <div class="grid" id="stage-grid"></div>
+      <button id="btn-back-title">もどる</button>
+    </div>
+  </section>
+
+  <!-- クリア / 失敗 -->
+  <section class="screen" id="result-screen" hidden>
+    <div class="card result-card">
+      <div class="big-emoji" id="result-emoji"></div>
+      <div class="result-word" id="result-word"></div>
+      <div class="badge" id="result-badge"></div>
+      <p id="result-text"></p>
+      <div class="row">
+        <button id="btn-result-retry">もういちど</button>
+        <button class="primary" id="btn-next">つぎへ</button>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
